@@ -6,7 +6,7 @@
 
 -module(tud).
 
--export([])
+-export([add/2, sub/2, divs/2, multi/2, sybm/2]).
 
 
 add(Anumber, Bnumber) ->
