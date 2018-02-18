@@ -122,4 +122,92 @@
     user = User.query.filter(name='tome')
     db.session.delete(user)
     db.session.commit()
+
+    # RDBMS
+    # one to one
+
+    example:
+           
+            clsss Post(db.Model):
+                id = db.Column(db.Integer(), primary_key=True)
+                title = db.Column('title', db.String(255))
+                user_id = db.Column(db.Integer(), db.ForeignKey('user.id'))
+
+            class User(db.Model):
+                id = db.Column(db.Integer(), primary_key=True)
+                posts = db.relationship('Post', backref='user', lazy='dynamic')
+
+
+    # many to many
+
+    example:
+
+            tags = db.Table('post_tags', 
+                       db.Column('post_id', db.Integer, db.ForeignKey('post.id')),
+                       db.Column('tag_id', db.Integer, db.ForeignKey('tag.id')))
+      
+            class Post(db.Model):
+                id = db.Column(db.Integer(), primary_key=True)
+                title = db.Column(db.String(255))
+                tags = db.relationship('Tag', secondary=tags, backref=db.backref('posts', lazy='dynamic'))
+                def __init__(self, title):
+                    return self.title
+                def __repr__(self):
+                    return '<tag {}>'.format(self.title)
+
+            class Tag(db.Model):
+                id = db.Column(db.Integer(), primary_key=True)
+                title = db.Column('title', db.String(255))
+                
+                def __init__(self, title):
+                    return self.title = title
+
+                def __repr__(self):
+                    return '<tag {}>'.format(self.title)
 ```
+
+```
+    database migrate
+
+    # in manage.py
+
+   from flask_script import Manager, Server
+   from flask_migrate import Migrate, MigrateCommand
+
+   from app import app, db, User, Tag, Post
+
+   migrate = Migrate(app)
+  
+   manager = Manager(app)
+
+   manager.add_command('server', Server())
+   manager.add_command('db', MigateCommand)
+
+   @manager.shell
+   def _make_content_text():
+       return dict(app=app, db=db, User=User, Post=Post, Tag=Tag)
+
+   if __name__ == '__main__':
+       manage.run()
+
+   # initial database
+   python manage.py db init
+  
+   # database migrate
+
+   python manage.py db migrate -m "initial migrate"
+
+   # database upgrade
+
+   python manage.py db upgrade
+
+   # database history
+
+   python manage.py db history
+
+   # rowback version
+
+   python manage.py db downgrade
+```
+
+
