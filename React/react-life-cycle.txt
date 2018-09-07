@@ -1,0 +1,27 @@
+1. react life cycle function
+
+   a. initalization ==> constructor
+      set props and state
+
+   b. mounting
+
+      0.1: componentWillMount
+      0.2: render
+      0.3: componentDidMount
+
+   c. updation
+
+      0.1: props                        state
+
+             |                            |
+             V                            V
+             componentWillReceiveProps    shouldComponentUpdate
+             |                            |    false or true
+             V                            V
+             shouldComponentUpdate        render
+             |     false or true          |
+             V                            V
+             render                       componentDidUpdate
+             |
+             V
+             componentDidUpdate  
