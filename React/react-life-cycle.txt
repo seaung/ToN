@@ -21,7 +21,31 @@
              shouldComponentUpdate        render
              |     false or true          |
              V                            V
+             componentWillUpdate          componentWillUpdate
+             |                            |
+             V                            V
              render                       componentDidUpdate
              |
              V
              componentDidUpdate  
+
+    note：
+         生命周期函数是指在某一时刻组件自动调用执行的函数
+
+         componentWillMount 组件被挂载到页面之前执行
+         render 负责页面的渲染
+         componentDidMount 组件被挂载到页面完成后被执行
+
+         shouldComponentUpdate 组件将被跟新时会被执行，它返回一个布尔值
+         componentWillUpdate 组件被跟新之前他会自动执行，但是它在shouldComponnetUpdate被执行
+                             如果shouldComponentUpdate函数返回true，componentWillUpdate才会被执行
+                             如果shouldComponentUpdate函数返回false，componentWillUpdate不会被执行
+
+         componentDidUpdate 组件被跟新完成之后执行
+
+
+2. using React ref
+
+   a. using ref operation html dom
+
+      ref = { (args) => { this.element = element_variable } }
