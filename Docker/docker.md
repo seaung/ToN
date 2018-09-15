@@ -71,3 +71,49 @@
    参数解释:
           -d 选项会将docker容器放到后台上运行
 ```
+
+```
+
+```
+    8. 获取容器的日志
+
+    command:
+            docker tags -f docker_container
+
+    参数解释:
+           -f 监控docker的日志，这个与tail -f 命令非常相似
+    
+    note:
+         可以通过ctrl+c退出日志的跟踪
+         docker logs --tail 10 docker_container 获取最后10行的日志内容
+         docker logs --tail 0 -f docker_container 获取容器的最新日志内容
+```
+
+```
+    9. 查看容器内的进程
+
+    command:
+            docker top docker_container
+```
+
+```
+    10.停止守护式容器
+
+    command:
+            docker stop docker_container | docker_container_id
+```
+
+```
+    11. 自动重启容器
+    
+    command:
+            docker run --restart=always --name docker_container_name | -d docker_base_image docker_run_command
+    参数解释:
+            --restart标志会检查容器的退出代码，并根据此来决定是否要重启容器，默认的行为是docker不会重启容器
+    
+    note:
+          --restart设为always表示容器的退出代码是什么，docker都会重启容器
+          当设为no-failure时，只有容器的退出代码为非零时才重启容器
+          另外on-failure选项还接受一个可选参数
+          重启参数： --restart=on-failure：5
+```
