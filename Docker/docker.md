@@ -117,3 +117,54 @@
           另外on-failure选项还接受一个可选参数
           重启参数： --restart=on-failure：5
 ```
+
+```
+    12. 获取更多容器的信息
+
+    command:
+            docker inspect docker_container
+
+    参数解释:
+           -f | --format 用来查看结果
+
+           例如：
+                docker inspect --format={state.running}
+```
+
+```
+    13. 删除容器
+
+    command:
+            docker rm container_name | ID
+
+    note:
+         运行中的docker容器是无法删除的，必须通过Docker stop 或者Docker kill命令将其停止，才能将容器删除
+         目前还没有一次性删除所有容器
+
+         docker rm `docker ps -a -q`
+
+         ps命令会列出全部容器，-a代表列出所有的容器，-q表示需要返回容器的Id而不是其他信息，这样就可以得到容器的id列表
+         并将传给docker rm命令，从而达到删除所有容器的目的
+```
+
+```
+    14. 列出镜像
+
+    command:
+            docker images image_name
+
+```
+
+```
+    15. 拉取镜像
+
+    command:
+            docker pull images_name
+```
+
+```
+    16. 查找镜像
+
+    command:
+            docker search images_name
+```
