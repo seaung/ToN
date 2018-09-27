@@ -1,0 +1,36 @@
+1. 安装路由依赖包
+
+    npm install react-router --save
+
+    npm install react-router-dom --save
+
+
+2. 路由组件
+
+    1. Router
+
+    2. Route
+
+    3. hashHistory
+
+
+3. 基本使用
+
+    import { Router, Route, Link } from 'react-router-dom'
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><Link to="/path">path_name</Link></li>
+                <li><Link to="/path">path_name</Link></li>
+                <li><Link to="/path">path_name</Link></li>
+            </ul>
+        </div>
+    </nav>
+
+    <Router>
+        <div>
+            <Route component={ component_name }/>
+            <Route component={ component_name }/>
+        </div>
+    </Router>
