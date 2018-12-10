@@ -92,3 +92,38 @@
       bootstrap: [AppComponent]
       })
       export class AppModule { }
+
+    4. 编写counter UI组件
+
+       import { Component } from "@angular/core";
+       import { Store, select } from '@ngrx/store';
+       import { Observable } from 'rxjs';
+       import { Increment, Decrement, Reset } from '../counter.actions';
+
+       @Component({
+         selector: 'app-counter',
+         template: `
+           <button (click)="increment()">Increment</button>
+           <div>current count: {{ count$ | async }}</div>
+           <button (click)="decrement()">Decrement</button>
+           <button (click)="reset()">Reset</button>
+         `
+         })
+         export class CounterComponent {
+           count$ = Observable<number>;
+           constructor(private store: Store<{ count: number}>) {
+             this.count$ = store.pip(select('count'));
+           }
+
+           increment() {
+             this.store.dispatch(new Increment());
+           }
+
+           decrement() {
+             this.store.dispatch(new Decrement());
+           }
+
+           reset() {
+             this.store.dispatch(new Reset());
+           }
+         }
