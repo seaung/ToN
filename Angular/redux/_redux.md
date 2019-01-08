@@ -1,5 +1,5 @@
 #### Effects
->>>
+>
     1. 创建effects
 
     import { Injectable } from '@angular/core';
@@ -47,7 +47,7 @@
       export class AdminModule { }
 
 #### Action
->>>
+>
     1. the action interface
        an action in NgRx is made up of a simple interface
 

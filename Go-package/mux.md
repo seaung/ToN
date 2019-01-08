@@ -1,15 +1,15 @@
 #### Mux
->>>
+>
 
     mux一个用来处理http请求的路由库
 
 #### install
->>>
+>
 
     go get -u github.com/gorilla/mux
 
 #### Example
->>>
+>
 
     package main
 
@@ -24,6 +24,6 @@
     }
 
 #### Methods
->>>
+>
 
     Vars()获取参数

@@ -1,5 +1,5 @@
 #### Angular Form
->>>
+>
     1. FormsModule
     2. ReactiveFormsModule
 
@@ -26,7 +26,7 @@
     5. FormBuilder
 
 #### 举个栗子
->>>
+>
     import { Component, OnInit } from '@angular/core';
     import { FormGroup, ForomBuilder, Validators } from '@angular/forms';
 

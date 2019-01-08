@@ -1,5 +1,5 @@
 #### @Inject()
->>>
+>
     @Inject()是一个手动机制，让Angular知道必须注入参数，他可以这样使用
 
     import { Component, Inject } from '@angular/core';
@@ -19,7 +19,7 @@
       }
 
 #### @Injectable()
->>>
+>
     import { Injectable } from '@angular/core';
     import { AuthService } from './auth-service';
     import { AuthWidget } from './auth-widget';

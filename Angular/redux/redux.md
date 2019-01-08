@@ -1,5 +1,5 @@
 #### Redux核心概念
->>>
+>
     1. 应用的所有数据都放在一个叫作state的数据结构中，而state存放在store中
     2. 应用从store中读取state
     3. store永远不会被直接修改
@@ -16,22 +16,22 @@
     ----------------
 
 #### reducer
->>>>
+>
     1. 接收旧的state和action并返回新的state
     2. reducer必须是一个纯函数
        a. 他不直接修改当前的state
        b. 他不会使用参数之外的任何数据
 
 #### Action
->>>
+>
     1. action: 定义要做什么(能带可选参数)
 
 #### State
->>>
+>
     1. State: 储存应用中的所有数据
 
 ##### 计数器例子
->>>
+>
     1. 创建actions
     import { Action } from '@ngrx/store';
 

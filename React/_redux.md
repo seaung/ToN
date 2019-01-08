@@ -1,5 +1,5 @@
 #### Redux 补充
->>>
+>
 
     1. 创建reducer,并把它传递给store
     2. 创建store,接受reducer
@@ -9,7 +9,7 @@
     6. 使用store.subscribe(handlerEmitEventFunction)来订阅state的改变
 
 #### example
->>>
+>
 
     1. 创建reducer
 

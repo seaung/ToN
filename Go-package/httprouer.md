@@ -1,14 +1,14 @@
 #### Package httprouter
->>>
+>
     httprouter是一个高性能的http请求路由库
 
 #### install
->>>
+>
 
     go get -u github.com/julienschmidt/httprouter
 
 #### Example
->>>
+>
 
     package main
 
@@ -32,7 +32,7 @@
     }
 
 #### 自己常用的方法
->>>
+>
 
     1. New() // 不是常用这个是必须的，兄die <-_<-
     创建一个router路由器

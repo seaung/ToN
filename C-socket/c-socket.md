@@ -1,5 +1,5 @@
 #### IPV4套接字地址结构
->>>
+>
     1. ipv4套接口地址结构通常也称为，网际套接字地址结构
        定义在netinet/in.h头文件中
 
@@ -35,7 +35,7 @@
        sa_data：由sin_family决定它的形式
 
 #### 字节序转换函数
->>>
+>
     包含头文件<arpa/inet.h>
 
     uint32_t htonl(uint32_t hostlong)
@@ -52,7 +52,7 @@
     l：表示long
 
 #### 地址转换函数
->>>
+>
     包含头文件<netinet/in.h>,<arpa/in.h>
 
     int net_aton(const char* cp, struct in_addr *inp);
@@ -65,7 +65,7 @@
     地址结构转换为点分十进制的ip地址
 
 #### 套接字类型
->>>
+>
     1. 流式套接字(SOCK_STREAM)
        提供面向连接的，可靠的数据传输服务，数据无差错，无重复的发送，且发送顺序接收
 
@@ -75,7 +75,7 @@
     3. 原始套接字(SOCK_RAW)
 
 #### 套接字函数
->>>
+>
     1. socket函数
 
        头文件包含<sys/socket.h>

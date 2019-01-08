@@ -1,5 +1,5 @@
 #### Angular组件
->>>
+>
     angualr中的组件
 
     import { Component } from '@angular/core';

@@ -1,5 +1,5 @@
 #### 操作符详解
->>>
+>
     1. map操作符
        public map(project: function(value: T, index:number):R, thisArg:any):Observable<R>
        将给定的project函数应用于源Observable发出的每个值，并将结果作为Observable发出

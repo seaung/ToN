@@ -1,6 +1,6 @@
 #### Tmux 安装
 
->>>
+>
     ubuntu:
 	    sudo apt-get install tumx
 
@@ -9,7 +9,7 @@
 
 #### 新建会话
 
->>>
+>
     tmux new -s session-name
 
 #### 查询会话
@@ -17,22 +17,22 @@
 
 #### 断开会话
 
->>>
+>
 	tmux detach or ctrl + b d
 
 #### 重新连接会话
 
->>>
+>
 	tmux a -t session-name
 
 #### 关闭会话
 
->>>
+>
 	tmux kill-session -t session-name
 
 #### tmux常用快捷键
 
->>>
+>
     note:在tmux会话中使用的快捷键都需要一个前缀来激活，即ctrl+b
 
 	会话管理相关快捷键
@@ -74,7 +74,7 @@
 	5. ctrl + b } 与下一个窗格交换位置
 
 	6. ctrl + b { 与上一个窗口交换位置
-	
+
 	7. ctrl + b ! 在新窗口中显示当前窗格
 
 	8. ctrl + b x 关闭当前窗格
@@ -82,4 +82,3 @@
 	其他
 
 	1. ctrl + b t 在当前窗格显示时间
-

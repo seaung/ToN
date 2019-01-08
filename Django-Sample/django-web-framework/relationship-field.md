@@ -1,11 +1,11 @@
 #### 关系字段
->>>
+>
     1. ForeignKey
     2. ManyToManyField
     3. OneToOneField
 
 #### related_name
->>>
+>
     用于外键反向查询，通过父表查询到字表中的信息
 
     django默认给每个主表的对象都添加一个外键的属性，可以通过他来查询到属于主表的子表的信息，
@@ -30,7 +30,7 @@
             a.a_tab.all()
 
 #### ForeignKey
->>>
+>
     A many-to-one relationship.
     Requires two positional arguments: the class to which the model is related and the on_delete option
 
@@ -61,7 +61,7 @@
            f = models.ForeignKey(A, SET())
 
 #### 自关联字段
->>>
+>
     class A(models.Model):
         a = models.CharField(max_length=200)
         pid = models.ForeignKey("self", ....)

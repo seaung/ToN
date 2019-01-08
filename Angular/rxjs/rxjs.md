@@ -1,9 +1,9 @@
 #### Rxjs
->>>
+>
     Rxjs：把任何变化想象成事件流
 
 #### 常用Rxjs操作符
->>>
+>
     创建类操作符
     1. from：可以把数组，promise，以及Iterable转化为Observable
     2. fromEvent：把事件转化为Observable
@@ -39,7 +39,7 @@
     2. merge，concat，startWith
 
 #### Observable的性质
->>>
+>
     三种状态
 
     1. next
@@ -47,7 +47,7 @@
     3. complete
 
 #### 举个栗子
->>>
+>
     1. 来自一个或多个值
 
     Rx.Observable.of('of', 'bar')
@@ -65,7 +65,7 @@
     Rx.Observable.fromPromise(fetch('/users'))
 
 #### pipe操作符的用法
->>>
+>
     import { range } from 'rxjs/observable/range';
     import { map, filter, scan } from 'rxjs/operators';
 

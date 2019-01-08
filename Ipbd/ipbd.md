@@ -1,13 +1,13 @@
 #### 使用IPBD调试python程序
 
 
->>>
+>
    1. 设置断点
       import ipbd; ipbd.set_trace()
 
    2. 常用调试命令
       - h(help) 显示帮组命令
-      
+
       - s(set into) 进入函数内部
 
       - n(next) 执行下一步

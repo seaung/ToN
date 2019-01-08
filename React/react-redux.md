@@ -1,5 +1,5 @@
 #### 安装
->>>
+>
 
     yarn add react-redux
 
@@ -8,7 +8,7 @@
     npm install --save react-redux
 
 #### Provider和connect
->>>
+>
 
     react-redux提供了<Provider />用于让整个应用都能访问到store里面的数据
 
@@ -47,7 +47,7 @@
     export default connect(mapStateToProps, mapDispatchToProps)(Counter)
 
 #### connect函数使用mapstateToProps解析数据
->>>
+>
 
     作为connect函数的第一个参数，mapStateToProps用于数据存储的一部分，连接组件的需求
 
@@ -56,7 +56,7 @@
     2. 他接受整个store里面的state并且应该返回这个组件所需的一个对象
 
 #### 定义mapstateToProps
->>>
+>
 
     mapStateToProps应该定义成一个函数
 
@@ -71,7 +71,7 @@
     }
 
 #### connect函数使用mapDispatchToProps来派发action
->>>
+>
 
     作为connect函数的第二个参数，mapDispatchToProps用于派发action到store上
 
