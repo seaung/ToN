@@ -1,54 +1,57 @@
 set number
-syntax enable
-syntax on
-" set guifont=Monac\ 12
-set history=2000
-filetype on
+set history=5000
+set cursorline
+set cursorcolumn
+set ruler
+set autoread
+set showmatch
+set encoding=utf-8
+set fenc=utf-8
+set mouse=a
+set hlsearch
+set showcmd
+set laststatus=2
+set smartindent
+set showmode
+set nocompatible              " be iMproved, required
 filetype indent on
 filetype plugin on
 filetype plugin indent on
-set autoread
-
-" set nobackup
-" set noswapfile
-
-set cursorline
-set cursorcolumn
-
-" set mouse=a
-
-set ruler
-
-set showcmd
-
-set showmode
-
-set laststatus=2
-
-set nowrap
-
-set autoindent
-set cindent
-set smartindent
-
-set tabstop=4
-
-set nocompatible              " be iMproved, required
 filetype off                  " required
+
+syntax on
+syntax enable
+
+
+" ===============================python configuration=======================================
+" au BufNewFile,BufRead *.py
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set textwidth=79
+set expandtab
+set autoindent
+set fileformat=unix
+
+" ===============================python configuraiton end===================================
+
+
+" ===============================nerdtree plugin configuration==============================
 
 autocmd vimenter * NERDTree
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-
 map <C-n> :NERDTreeToggle<CR>
-
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 
+" ===============================nerdtree plugin configuration end========================
+
+
+" ===============================nerdtree-git-plugin configuration========================
 
 let g:NERDTreeIndicatorMapCustom = {
     \ "Modified"  : "✹",
@@ -63,83 +66,241 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Unknown"   : "?"
     \ }
 
-
 let g:NERDTreeShowIgnoredStatus = 1
 
-let g:indentLine_setColors = 0
+" ===============================nerdtree-git-plugin configuration end======================
 
+
+" ===============================indentLine plugin configuration============================
+" Vim
 let g:indentLine_color_term = 239
 
+" GVim
+let g:indentLine_color_gui = '#A4E57E'
+
+" none X terminal
+let g:indentLine_color_tty_light = 7 " (default: 4)
+let g:indentLine_color_dark = 1 " (default: 2)
+
+" Background (Vim, GVim)
 let g:indentLine_bgcolor_term = 202
 let g:indentLine_bgcolor_gui = '#FF5F00'
-
-let g:indentLine_char = 'c'
-
 let g:indentLine_concealcursor = 'inc'
 let g:indentLine_conceallevel = 2
-
+let g:indentLine_setConceal = 0
 let g:indentLine_enabled = 0
+let g:indentLine_char = '┊'
+let g:vim_json_syntax_conceal = 0 "or run :IndentLinesDisable
+" ===============================indentLine plugin configuration end========================
 
-autocmd FileType python noremap <buffer> <F8> :call Autopep8()<CR>
 
-let g:autopep8_ignore="E501,W293"
+" ===============================vim-power-line plugin configuration========================
+set nocompatible   " Disable vi-compatibility
+set laststatus=2   " Always show the statusline
+set encoding=utf-8 " Necessary to show Unicode glyphs
+set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
+let g:Powerline_cache_dir = simplify(expand('<sfile>:p:h') .'/..')
+let g:Powerline_cache_enabled = 0
+let g:Powerline_symbols = 'fancy'
+let g:Powerline_mode_n = 'NORMAL'
+let g:Powerline_theme = 'solarized256'
+let g:Powerline_colorscheme = 'solarized256'
+let g:Powerline_stl_path_style = 'full'
+let g:Powerline_dividers_override = ['>>', '>', '<<', '<']
+let g:Powerline_symbols_override = {
+        \ 'BRANCH': [0x2213],
+        \ 'LINE': 'L',
+        \ }
+" ===============================vim-power-line plugin configuration end====================
 
-let g:autopep8_select="E501,W293"
+" ================================sysntastic plugin configuration===========================
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
-let g:autopep8_pep8_passes=100
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+" let g:syntastic_<filetype>_checkers = ['<checker-name>']
+let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
+let g:syntastic_tex_checkers = ['lacheck', 'text/language_check']
+let g:syntastic_aggregate_errors = 1
+let g:syntastic_ruby_mri_args = "--my --args --here"
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_quiet_messages = { "type": "style" }
+let g:syntastic_enable_perl_checker = 1
 
-let g:autopep8_max_line_length=79
+nnoremap <silent> <C-d> :lclose<CR>:bdelete<CR>
 
-let g:autopep8_aggressive=1
+cabbrev <silent> bd <C-r>=(getcmdtype()==#':' && getcmdpos()==1 ? 'lclose\|bdelete' : 'bd')<CR>
 
-let g:autopep8_aggressive=2
+function! FindConfig(prefix, what, where)
+    let cfg = findfile(a:what, escape(a:where, ' ') . ';')
+    return cfg !=# '' ? ' ' . a:prefix . ' ' . shellescape(cfg) : ''
+endfunction
 
-let g:autopep8_indent_size=2
+autocmd FileType javascript let b:syntastic_javascript_jscs_args =
+    \ get(g:, 'syntastic_javascript_jscs_args', '') .
+    \ FindConfig('-c', '.jscsrc', expand('<afile>:p:h', 1))
 
-let g:autopep8_disable_show_diff=1
+" ================================sysntastic plugin configuration end=======================
 
-let g:autopep8_diff_type='horizontal'
 
-let g:autopep8_diff_type='vertical'
+" ================================flake8 plugin configuration===============================
+"call flake8#Flake8UnplaceMarkers()
 
-let g:autopep8_on_save = 1
+autocmd FileType python map <buffer> <F3> :call Flake8()<CR>
 
-let g:indentLine_char='┆'
+" let g:flake8_cmd="/opt/strangebin/flake8000"
+let g:flake8_quickfix_location="topleft"
+let g:flake8_quickfix_height=7
+let g:flake8_show_quickfix=0  " don't show
+" let g:flake8_show_quickfix=1  " show (default)
+let g:flake8_show_in_gutter=0  " don't show (default)
+" let g:flake8_show_in_gutter=1  " show
+let g:flake8_show_in_file=0  " don't show (default)
+" let g:flake8_show_in_file=1  " show
+let g:flake8_max_markers=500  " (default)
 
-let g:indentLine_enabled = 1
+" flake8_error_marker='EE'     " set error marker to 'EE'
+" flake8_warning_marker='WW'   " set warning marker to 'WW'
+" flake8_pyflake_marker=''     " disable PyFlakes warnings
+" flake8_complexity_marker=''  " disable McCabe complexity warnings
+" flake8_naming_marker=''      " disable naming warnings
 
-" F5 run python program
-"map <F5> :Autopep8<CR> :w<CR> :call RunPython()<CR>
-"function RunPython()
-"		let mp = &makeprg
-"		let ef = &errorformat
-"		let exeFile = expand("%:t")
-"		setlocal makeprg=python\ -u
-"		set efm=
-"		silent make %
-"		copen
-"		let &makeprg = mp
-"		let &errorformat = ef
-"endfunction
+highlight link Flake8_Error      Error
+highlight link Flake8_Warning    WarningMsg
+highlight link Flake8_Complexity WarningMsg
+highlight link Flake8_Naming     WarningMsg
+highlight link Flake8_PyFlake    WarningMsg
 
-let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
-let g:ycm_confirm_extra_conf=0
-"set completeopt=logest,menu
-let g:ycm_path_to_python_interpreter='/usr/bin/python3.6'
-let g:ycm_seed_identifiers_with_syntax=1
-let g:ycm_complete_in_comments=1
-let g:ycm_collect_identifiers_from_comments_and_strings = 0
+autocmd BufWritePost *.py call Flake8()
+"=================================flake8 plugin configuration end===========================
+
+" ================================set color theme===========================================
+set background=dark
+" colorscheme solarized
+" ================================set color theme end=======================================
+
+" ================================python with virtualenv support============================
+" py << EOF
+" import os
+" import sys
+" if 'VIRTUAL_ENV' in os.environ:
+"     project_base_dir = os.environ['VIRTUAL_ENV']
+"     activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+"     execfile(activate_this, dict(__file__=activate_this))
+" EOF
+
+let pipenv_venv_path = system('pipenv --venv')
+
+if shell_error == 0
+  let venv_path = substitute(pipenv_venv_path, '\n', '', '')
+  let g:ycm_python_binary_path = venv_path . '/bin/python'
+else
+  let g:ycm_python_binary_path = 'python'
+endif
+"=================================python with virtualenv support end========================
+
+
+" ================================F5 run program============================================
+nnoremap <F5> :call CompileRunGcc()<cr>
+
+func! CompileRunGcc()
+    exec 'w'
+    if &filetype ==# 'c'
+        exec 'gcc -o3 % -o %<'
+        exec '!time ./%<'
+    elseif &filetype ==# 'cpp'
+        exec '!g++ -o3 % -o %<'
+        exec '!time ./%<'
+    elseif &filetype ==# 'java'
+        exec '!javac %'
+        exec '!time java %<'
+    elseif &filetype ==# 'sh'
+        :!time bash %
+    elseif &filetype ==# 'python'
+        if search('@profile')
+            exec 'AsyncRun kernprof -l -v %'
+            exec 'copen'
+            exec 'wincmd p'
+        elseif search('set_trace()')
+            exec '!python3 %'
+        else
+            exec 'AsyncRun -raw python3 %'
+            exec 'copen'
+            exec 'wincmd p'
+        endif
+    elseif &filetype ==# 'html'
+        exec '!firefox % &'
+    elseif &filetype ==# 'go'
+        ' exec '!go build %<'
+        exec '!time go run %'
+    elseif &filetype ==# 'mkd'
+        exec '!~/.vim/markdown.pl % > %.html &'
+        exec '!firefox %.html &'
+    endif
+endfunc
+" ================================F5 run program============================================
+
+
+" ================================rainbow_parentheses configuration=========================
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+" =================================rainbow_parentheses configuration end====================
+
+
+" =================================youcompleteme configuration==============================
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py'
+let g:ycm_server_python_interpreter = '/usr/local/bin/python3'
+autocmd Filetype python,c,cpp,Java,vim nnoremap <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+let g:ycm_key_invoke_completion = '<c-z>'
 let g:ycm_min_num_of_chars_for_completion=2
-let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_cache_omnifunc=0
-let g:ycm_complete_in_strings = 1
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
-"inoremap <expr> <CR>       pumvisible() ? '<C-y>' : '\<CR>'
-inoremap <expr> <Down>     pumvisible() ? '\<C-n>' : '\<Down>'
-inoremap <expr> <Up>       pumvisible() ? '\<C-p>' : '\<Up>'
-inoremap <expr> <PageDown> pumvisible() ? '\<PageDown>\<C-p>\<C-n>' : '\<PageDown>'
-inoremap <expr> <PageUp>   pumvisible() ? '\<PageUp>\<C-p>\<C-n>' : '\<PageUp>'
+let g:ycm_semantic_triggers =  {
+            \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+            \ 'cs,lua,javascript': ['re!\w{2}'],
+            \ }
+set completeopt=menu,menuone
+let g:ycm_add_preview_to_completeopt = 0
+let g:ycm_python_binary_path = 'python'
+let g:ycm_register_as_syntastic_checker = 0
+let g:ycm_max_num_candidates = 30
+let g:ycm_complete_in_strings=1
+let g:ycm_show_diagnostics_ui = 0
+let g:ycm_filetype_whitelist = {
+            \ 'c':1,
+            \ 'cpp':1,
+            \ 'objc':1,
+            \ 'python': 1,
+            \ 'Java': 1,
+            \ 'sh':1,
+            \ 'zsh':1,
+            \ 'zimbu':1,
+            \ 'vim':1,
+            \ }
+" =================================youcompleteme configuration end==========================
 
+" ==================================vundle manager==========================================
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -157,11 +318,37 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 " indentline
 Plugin 'Yggdroot/indentLine'
 
-" vim powerline
-Plugin 'Lokaltog/vim-powerline'
+" sysntastic
+Plugin 'vim-syntastic/syntastic'
+
+" indentpython.vim
+Plugin 'vim-scripts/indentpython.vim'
+
+" vim-flake8
+Plugin 'nvie/vim-flake8'
+
+" vim-colrs-solarized
+Plugin 'altercation/vim-colors-solarized'
+
+" zenburn theme
+Plugin 'jnurmine/Zenburn'
+
+" rainbow parentheses
+Plugin 'kien/rainbow_parentheses.vim'
+
+" python syntax highlighting
+Plugin 'kh3phr3n/python-syntax'
 
 " youcompleteme
 Plugin 'Valloric/YouCompleteMe'
+
+" vim powerline
+Plugin 'Lokaltog/vim-powerline'
+
+"base16-vim colorscheme
+Plugin 'chriskempson/base16-vim'
+
+Plugin 'mhartington/oceanic-next'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
@@ -172,7 +359,7 @@ Plugin 'tpope/vim-fugitive'
 " Git plugin not hosted on GitHub
 Plugin 'git://git.wincent.com/command-t.git'
 " git repos on your local machine (i.e. when working on your own plugin)
-Plugin 'file:///home/gmarik/path/to/plugin'
+" Plugin 'file:///home/gmarik/path/to/plugin'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
@@ -194,3 +381,4 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+" ===============================end========================================================
