@@ -1,4 +1,4 @@
-#### urllib.request.urlopen()
+#### urllib.request.urlopen
 
 >
     urlopen(url, data=None, timeout, cafile=None, capath=None, cadefault=False, context=None)
@@ -114,7 +114,7 @@
 
        print(filename)
 
-#### urllib.urljoin
+#### urllib.parse.urljoin
 
 >
     1. urljoin(base, url, allow_fragments=True)
@@ -126,6 +126,31 @@
 
        print(urllib.parse.join('https://www.cwi.nl', 'info.html'))
 
+#### urllib.parse.urlparse
+
+>
+    1. urlparse(urlstring, scheme='', allow_fragments=True)
+
+       返回一个六个元素的元祖
+
+    example:
+       
+       import urllib.parse.urlparse
+
+       url = 'http://www.cwi.nl:80/%7Eguido/Python.html'
+
+       url_components = urllib.parse.urlparse(url)
+
+       print(url_components.scheme)
+       print(url_components.netlol)
+       print(url_components.path)
+       print(url_components.params)
+       print(url_components.fragmen)
+       print(url_components.query)
+       print(url_components.port)
+       print(url_components.username)
+       print(url_components.passwor)
+       print(url_components.hostname)
 
 
 #### urllib.error
